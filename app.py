@@ -13,8 +13,10 @@ def login():
         uname  = request.form["uname"]
         pword  = request.form['pword']
         valid_user = utils.authenticate(uname,pword)
-        if button=="cancel" or not(valid_user):
+        if button=="cancel":
             return render_template("login.html")
+        elif not valid_user:
+            return render_template("newUser.html")
         else:
             return render_template("welcome.html",name=uname)
 

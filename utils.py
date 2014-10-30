@@ -1,2 +1,5 @@
 def authenticate(uname,pword):
-    return uname=="Thluffy" and pword=="Clyde"
+    if length(uname) != 0 and length(pword) !=0:
+        return True
+    else:
+        return False
