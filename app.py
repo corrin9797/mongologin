@@ -42,8 +42,17 @@ def login():
 def newUser():
     if request.method=="GET":
         return render_template("newUser.html")
-
+    else:
+        button = request.form["b"]
+        uname  = request.form["username"]
+        pword  = request.form['password']
+        if button == "create":
+            newUser = 
+        
+                            
 
 if __name__=="__main__":
     app.debug=True
     app.run();
+    
+     
