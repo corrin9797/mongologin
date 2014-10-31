@@ -1,5 +1,17 @@
 from flask import Flask,render_template,request,redirect
+from pymongo import Connection
 import utils
+
+#Writing helper mongo functions here
+
+
+
+
+
+
+
+
+
 
 app=Flask(__name__)
 
