@@ -1,9 +1,9 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 import utils
 
 app=Flask(__name__)
 
-@app.route("/login", methods=["GET","POST"])
+@app.route("/", methods=["GET","POST"])
 def login():
     if request.method=="GET":
         return render_template("login.html")
@@ -13,23 +13,24 @@ def login():
         uname  = request.form["uname"]
         pword  = request.form['pword']
         valid_user = utils.authenticate(uname,pword)
-        if button=="cancel":
+        error=None
+        if button=="clear":
             return render_template("login.html")
-        elif not valid_user:
-            return render_template("newUser.html")
-        else:
-            return render_template("welcome.html",name=uname)
+        if button=="newUser":
+            return redirect('/newUser')
+        elif valid_user is False:
+            error= "Did not match our records. Please try again or create a new account"
+            return render_template("login.html",error=error)
+        elif valid_user is True:
+            return render_template("welcome.html",name=uname, error=error)
 
-@app.route("/")
-def index():
-    button = request.args.get("b",None)
-    uname = request.args.get("uname",None)
-    pword = request.args.get("pword",None)
-    print button,uname,pword
-    if button==None:
-        return render_template("index.html")
-    else:
-        return "<h1>%s,%s,%s</h1"%(button,uname,pword)
+
+
+@app.route("/newUser", methods=["GET", "POST"])
+def newUser():
+    if request.method=="GET":
+        return render_template("newUser.html")
+
 
 if __name__=="__main__":
     app.debug=True
