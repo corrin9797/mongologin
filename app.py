@@ -1,14 +1,8 @@
 from flask import Flask,render_template,request,redirect
-from pymongo import Connection
+#from pymongo import Connection
 import utils
 
 #Writing helper mongo functions here
-
-
-
-
-
-
 
 
 
@@ -43,11 +37,19 @@ def newUser():
     if request.method=="GET":
         return render_template("newUser.html")
     else:
-        button = request.form["b"]
+        button = request.form["create"]
         uname  = request.form["username"]
         pword  = request.form['password']
-        if button == "create":
-            newUser = 
+        create = utils.newUser(uname)
+        error=None
+        if create is True:
+            return render_template("welcome.html", name=uname, error=error)
+        else:
+            error = "Sorry, the username you have selected already exists."
+            return render_template("newUser.html", error=error)
+
+           
+                
         
                             
 
