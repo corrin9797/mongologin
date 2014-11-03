@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect
+from flask import Flask,render_template,request,redirect, session
 #from pymongo import Connection
 import utils
 
@@ -28,7 +28,12 @@ def login():
             error= "Did not match our records. Please try again or create a new account"
             return render_template("login.html",error=error)
         elif valid_user is True:
-            return render_template("welcome.html",name=uname, error=error)
+            if uname not in session:
+                session[uname]=0
+            n = session[uname]
+            n=n+1
+            session[uname]=n
+            return render_template("welcome.html",name=uname, error=error, n=n)
 
 
 
@@ -40,20 +45,22 @@ def newUser():
         button = request.form["create"]
         uname  = request.form["username"]
         pword  = request.form['password']
-        create = utils.newUser(uname)
+        create = utils.newUser(uname,pword)
         error=None
         if create is True:
             return render_template("welcome.html", name=uname, error=error)
         else:
-            error = "Sorry, the username you have selected already exists."
+            error = "Sorry, the username you have selected already exists or you didn't enter a password."
             return render_template("newUser.html", error=error)
 
            
                 
         
-                            
+
+    
 
 if __name__=="__main__":
+    app.secret_key="GetBetterGeButter"
     app.debug=True
     app.run();
     
