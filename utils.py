@@ -28,9 +28,9 @@ def newAuth(uname,pword):
 	
 
 # method for testing purposes 	
-def newUser(uname):
+def newUser(uname, pword):
     name = ['Mark', 'Sue', 'Sally', 'Sam']
-    if uname in name:
+    if uname in name or len(pword)==0:
         return False
     else: 
         return True
