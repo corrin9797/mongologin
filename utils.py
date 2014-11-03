@@ -1,4 +1,4 @@
-#from pymongo import Connection
+from pymongo import Connection
 
 def authenticate(uname,pword):
     if len(uname) == 0 or len(pword) ==0:
@@ -8,12 +8,24 @@ def authenticate(uname,pword):
 
 #new authenticate in progress below:
 
-#def newAuth(uname,pword):
-#	if len(uname) == 0 or len(pword) ==0:
-#            return False
-#	conn=Connection()
-#	db=conn["mydb"]
-#	db.testbase.insert({"cow":"moo"})
+def floop(x):
+	res=x
+	for r in res:
+		if r['user']==('moo'):
+			if r['pw']==('oink'):
+				print 'OMG IT WORKS'
+
+def newAuth(uname,pword):
+	if len(uname) == 0 or len(pword) ==0:
+            return False
+	conn=Connection()
+	db=conn["mydb"]
+	#floop(db.testbase.find())
+	#db.testbase.drop()
+	#db.testbase.insert({'user':'moo', 'pw':'oink'})
+	
+	floop(db.testbase.find())
+	
 
 # method for testing purposes 	
 def newUser(uname):
@@ -22,4 +34,7 @@ def newUser(uname):
         return False
     else: 
         return True
-    
+
+
+
+newAuth("moo","oink")
