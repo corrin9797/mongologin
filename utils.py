@@ -1,40 +1,57 @@
 from pymongo import Connection
 
-def authenticate(uname,pword):
-    if len(uname) == 0 or len(pword) ==0:
-        return False
-    else:
-        return True
+
 
 #new authenticate in progress below:
 
-def floop(x):
-	res=x
-	for r in res:
-		if r['user']==('moo'):
-			if r['pw']==('oink'):
-				print 'OMG IT WORKS'
+def floop(x,u,p):
+    res=x
+    for r in res:
+        if r['user']==(u):
+            if r['pw']==(p):
+                return True
+    return False
+
+def mfloop(x,u):
+    res=x
+    for r in res:
+        if r['user']==(u):
+            return True
+    return False
 
 def newAuth(uname,pword):
-	if len(uname) == 0 or len(pword) ==0:
+    if len(uname) == 0 or len(pword) ==0:
             return False
-	conn=Connection()
-	db=conn["mydb"]
-	#floop(db.testbase.find())
-	#db.testbase.drop()
-	#db.testbase.insert({'user':'moo', 'pw':'oink'})
-	
-	floop(db.testbase.find())
-	
+    conn=Connection()
+    db=conn["mydb"]
+    #floop(db.testbase.find())
+    #db.testbase.drop()
+    #db.testbase.insert({'user':'moo', 'pw':'oink'})
+    
+    return floop(db.testbase.find(),uname,pword)
+    
 
-# method for testing purposes 	
-def newUser(uname, pword):
+#lazy copy and paste solutions for the win!
+def authenticate(uname,pword):
+    return newAuth(uname,pword)
+# method for testing purposes     
+def newUser(uname):
     name = ['Mark', 'Sue', 'Sally', 'Sam']
-    if uname in name or len(pword)==0:
+    if uname in name:
         return False
     else: 
         return True
 
+def newUser(uname,pword):
+	if len(uname) == 0 or len(pword) ==0:
+		return False
+	conn=Connection()
+	db=conn["mydb"]
+	if mfloop(db.testbase.find(),uname):
+		return False
+	#floop(db.testbase.find())
+	#db.testbase.drop()
+	db.testbase.insert({'user':uname, 'pw':pword})
 
 
-newAuth("moo","oink")
+
