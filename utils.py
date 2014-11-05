@@ -53,5 +53,3 @@ def newUser(uname,pword):
 	#db.testbase.drop()
 	db.testbase.insert({'user':uname, 'pw':pword})
 
-
-
