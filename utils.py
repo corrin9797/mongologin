@@ -54,7 +54,7 @@ def newUser(uname,pword):
 	db.testbase.insert({'user':uname, 'pw':pword})
 	return True
 
-print newUser("moo","oinker")
-print authenticate("moo","oinker")
+#print newUser("moo","oinker")
+#print authenticate("moo","oinker")
 
 
