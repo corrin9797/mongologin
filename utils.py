@@ -52,6 +52,11 @@ def newUser(uname,pword):
 	#floop(db.testbase.find())
 	#db.testbase.drop()
 	db.testbase.insert({'user':uname, 'pw':pword})
+	return True
+
+print newUser("moo","oinker")
+print authenticate("moo","oinker")
+
 
 
 
