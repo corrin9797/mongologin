@@ -58,5 +58,3 @@ print newUser("moo","oinker")
 print authenticate("moo","oinker")
 
 
-
-
